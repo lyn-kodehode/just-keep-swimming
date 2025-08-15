@@ -5,7 +5,8 @@
 // 3. create a window screen how the game works
 // 4. make the obstacles move (optional)
 // 5. make the obstacles move in random distance (pixels, etc) (optional)
-// 4**************************************************************************************************************
+// 6. add if else statement on click to check for existing elements
+// **************************************************************************************************************
 
 const swimmer = document.getElementById("swimmer-box");
 const ocean = document.getElementById("game-container");
