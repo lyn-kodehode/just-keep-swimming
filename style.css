@@ -46,6 +46,31 @@ img {
   top: 50%;
   left: 50%;
   /* background-color: rgba(128, 128, 128, 0.284); */
+  animation: shark-move 10s infinite linear;
+  transition: all 0.3s ease;
+}
+@keyframes shark-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  15% {
+    transform: translate(100px, 0);
+  }
+  30% {
+    transform: translate(50px, 0);
+  }
+  45% {
+    transform: translate(0, 0);
+  }
+  60% {
+    transform: translate(-100px, 0);
+  }
+  80% {
+    transform: translate(-50px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 #ship-box {
   top: 25%;
@@ -66,6 +91,17 @@ img {
   left: 65%;
   top: 70%;
   /* background-color: rgba(128, 128, 128, 0.284); */
+  transition: all 0.3s ease;
+  animation: spin 1s infinite linear alternate-reverse;
+  /* animation-direction: ;  */
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 #whale-box {
   left: 30%;
