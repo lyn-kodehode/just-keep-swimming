@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  transition-behavior: smooth;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+img {
+  height: 100%;
+}
+#game-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(
+    #4bc7cf,
+    #3cb7cb,
+    #2da7c7,
+    #1e97c4,
+    #0f7ac0,
+    #0771b8
+  );
+  position: relative;
+  overflow: hidden;
+}
+#swimmer-box {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  transition: transform 0.1s ease-in-out;
+  /* background-color: rgba(0, 0, 255, 0.189); */
+}
+#shark-box {
+  position: relative;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  /* background-color: rgba(128, 128, 128, 0.284); */
+}
+#ship-box {
+  top: 25%;
+  left: 70%;
+  /* background-color: rgba(128, 128, 128, 0.284); */
+}
+#kraken-box {
+  left: 10%;
+  top: 75%;
+  /* background-color: rgba(128, 128, 128, 0.284); */
+}
+#mermaid-box {
+  left: 13%;
+  top: 16%;
+  /* background-color: rgba(128, 128, 128, 0.284); */
+}
+#floatie-box {
+  left: 65%;
+  top: 70%;
+  /* background-color: rgba(128, 128, 128, 0.284); */
+}
+#whale-box {
+  left: 30%;
+  top: 10%;
+  /* background-color: rgba(128, 128, 128, 0.284); */
+}
+#waves-box {
+  left: -25%;
+  top: 35%;
+  /* background-color: rgba(128, 128, 128, 0.284); */
+}
+.colliding {
+  border-radius: 50%;
+  background-color: #e6e6e6ab;
+}
+.npc-box {
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  position: relative;
+}
