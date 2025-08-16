@@ -16,6 +16,10 @@ const kraken = document.getElementById("kraken-box");
 const staticElements = document.querySelectorAll(".npc-box");
 const pixels = 10;
 const morePixels = 60;
+let swimmingRight = false;
+let swimmingLeft = false;
+let swimmingUp = false;
+let swimmingDown = false;
 let swimmerX = 0;
 let swimmerY = 0;
 
@@ -23,129 +27,132 @@ let swimmerY = 0;
 window.addEventListener("load", () => {
   ocean.focus();
   if (ocean) {
-    // swimmer.style.transform = `translate(${pixels}%, ${pixels}%)`;
+    window.addEventListener("resize", nearBorder);
     ocean.addEventListener("click", swim);
     ocean.addEventListener("keydown", swim);
-    window.addEventListener("resize", nearBorder);
-    collisionHandler(swimmer, staticElements);
+    ocean.addEventListener("keyup", swim);
+    speedBoost();
   }
 });
 
+//collision handling per .10 seconds
 setInterval(() => {
   // console.log(`log this every .10 second`);
   collisionHandler(swimmer, staticElements);
 }, 100);
 
-// **************MOVEMENT FUNCTION per click/keypress  *******************
+// MOVEMENT FUNCTION per click/keypress
 function swim(event) {
   nearBorder();
 
-  // runs when event is click
   if (event.type === "click") {
-    const xPosition = event.clientX;
-    const yPosition = event.clientY;
-
-    // to target and move elememt from its center
-    const imgWidth = swimmer.offsetWidth;
-    const imgHeight = swimmer.offsetHeight;
-
-    // swimmerX = xPosition - imgWidth;
-    swimmerX = xPosition - imgWidth / 2;
-    swimmerY = yPosition - imgHeight / 2;
-    // swimmerY = yPosition - imgHeight;
-
-    if (event.target === ocean) {
-      // tramsform method
-      swimmer.style.transform = `translate(${swimmerX}px,${swimmerY}px)`;
-      // position method
-      // swimmer.style.left = `${swimmerX}px`;
-      // swimmer.style.top = `${swimmerY}px`;
-
-      // console.log(`Swimmer x: ${swimmerX}, y:${swimmerY}`);
-    }
+    whenClicking(event);
   }
-
-  // runs when event is keydown
   if (event.type === "keydown") {
-    // position method
-    // swimmer.style.left = `${swimmerX}px`;
-    // swimmer.style.top = `${swimmerY}px`;
-    switch (event.key) {
-      case "ArrowUp":
-        // position method
-        // swimmerY -= pixels;
-
-        // transform method
-        swimmer.style.transformOrigin = "center center";
-        swimmer.style.transform = `translate(${swimmerX}px,${(swimmerY -=
-          pixels)}px) rotate(270deg)`;
-        // swimmer.style.transform = `translate(${swimmerX}px,${(swimmerY -=
-        //   pixels)}px)`;
-        break;
-      case "ArrowDown":
-        // swimmerY += pixels;
-        swimmer.style.transformOrigin = "center center";
-        swimmer.style.transform = `translate(${swimmerX}px,${(swimmerY +=
-          pixels)}px) rotate(90deg)`;
-        // swimmer.style.transform = `translate(${swimmerX}px,${(swimmerY +=
-        //   pixels)}px)`;
-        break;
-      case "ArrowLeft":
-        // swimmerX -= pixels;
-        swimmer.style.transformOrigin = "center center";
-        swimmer.style.transform = `translate(${(swimmerX -=
-          pixels)}px,${swimmerY}px) scaleX(-1)`;
-        // swimmer.style.transform = `translate(${(swimmerX -=
-        //   pixels)}px,${swimmerY}px)`;
-        break;
-      case "ArrowRight":
-        // swimmerX += pixels;
-        swimmer.style.transformOrigin = "center center";
-        swimmer.style.transform = `translate(${(swimmerX +=
-          pixels)}px,${swimmerY}px) rotate(0deg)`;
-        // swimmer.style.transform = `translate(${(swimmerX +=
-        //   pixels)}px,${swimmerY}px)`;
-        break;
-      default:
-        break;
-    }
+    whenKeyPressing(event);
   }
-  collisionHandler(swimmer, staticElements);
+  if (event.type === "keyup") {
+    noKeyPress(event);
+  }
+  // collisionHandler(swimmer, staticElements);
 
   // prevents default browser scrolling
   event.preventDefault();
   // console.log(`Swimmer x: ${swimmerX}, y:${swimmerY}`);
 }
 
-// ****************CLICK FUNCTION****************
-/* function whenClicking(event) {
-  if (event.type === "click") {
-    const xPosition = event.clientX;
-    const yPosition = event.clientY;
-    const areaClicked = document.elementFromPoint(xPosition, yPosition);
-    const imgWidth = swimmer.offsetWidth;
-    const imgHeight = swimmer.offsetHeight;
+// onClick event function
+function whenClicking(event) {
+  const xPosition = event.clientX;
+  const yPosition = event.clientY;
 
-    swimmerX = xPosition - imgWidth / 2;
-    swimmerY = yPosition - imgHeight / 2;
+  // to target and move elememt from its center
+  const imgWidth = swimmer.offsetWidth;
+  const imgHeight = swimmer.offsetHeight;
 
-    if (event.target === ocean) {
-      // ***
+  swimmerX = xPosition - imgWidth / 2;
+  swimmerY = yPosition - imgHeight / 2;
 
-      // tramsform method
-      swimmer.style.transform = `translate(${swimmerX}px,${swimmerY}px)`;
-      // position method
-      // swimmer.style.left = `${swimmerX}px`;
-      // swimmer.style.top = `${swimmerY}px`;
-
-      // console.log(`Swimmer x: ${swimmerX}, y:${swimmerY}`);
-      // ***
-    }
-    console.log(event.target);
+  if (event.target === ocean) {
+    swimmer.style.transform = `translate(${swimmerX}px,${swimmerY}px)`;
   }
-} */
+}
 
-// *************  COLLISION CHECKING FUNCTION  **********************
+// onKeyPress event function
+function whenKeyPressing(event) {
+  switch (event.key) {
+    case "ArrowUp":
+      swimmingUp = true;
+      swimmer.style.transformOrigin = "center center";
+      swimmer.style.transform = `translate(${swimmerX}px,${(swimmerY -=
+        pixels)}px) rotate(270deg)`;
+      break;
+    case "ArrowDown":
+      swimmingDown = true;
+      swimmer.style.transformOrigin = "center center";
+      swimmer.style.transform = `translate(${swimmerX}px,${(swimmerY +=
+        pixels)}px) rotate(90deg)`;
+      break;
+    case "ArrowLeft":
+      swimmingLeft = true;
+      swimmer.style.transformOrigin = "center center";
+      swimmer.style.transform = `translate(${(swimmerX -=
+        pixels)}px,${swimmerY}px) scaleX(-1)`;
+      break;
+    case "ArrowRight":
+      swimmingRight = true;
+      swimmer.style.transformOrigin = "center center";
+      swimmer.style.transform = `translate(${(swimmerX +=
+        pixels)}px,${swimmerY}px) rotate(0deg)`;
+      break;
+    default:
+      break;
+  }
+}
+
+function noKeyPress(event) {
+  switch (event.key) {
+    case "ArrowUp":
+      swimmingUp = false;
+      break;
+    case "ArrowDown":
+      swimmingDown = false;
+      break;
+    case "ArrowLeft":
+      swimmingLeft = false;
+      break;
+    case "ArrowRight":
+      swimmingRight = false;
+      break;
+    default:
+      break;
+  }
+}
+function speedBoost() {
+  if (swimmingUp) {
+    swimmer.style.transformOrigin = "center center";
+    swimmer.style.transform = `translate(${swimmerX}px, ${(swimmerY -=
+      pixels)}px) rotate(270deg)`;
+  }
+  if (swimmingDown) {
+    swimmer.style.transformOrigin = "center center";
+    swimmer.style.transform = `translate(${swimmerX}px, ${(swimmerY +=
+      pixels)}px) rotate(90deg)`;
+  }
+  if (swimmingLeft) {
+    swimmer.style.transformOrigin = "center center";
+    swimmer.style.transform = `translate(${(swimmerX -=
+      pixels)}px, ${swimmerY}px) scaleX(-1)`;
+  }
+  if (swimmingRight) {
+    swimmer.style.transformOrigin = "center center";
+    swimmer.style.transform = `translate(${(swimmerX +=
+      pixels)}px, ${swimmerY}px) rotate(0deg)`;
+  }
+  requestAnimationFrame(speedBoost);
+}
+
+// Collision checking function
 function collisionChecker(player, npcs) {
   const playerRect = player.getBoundingClientRect();
   for (const npc of npcs) {
@@ -164,13 +171,14 @@ function collisionChecker(player, npcs) {
   return false;
 }
 
-// ************  COLLISION HANDLING FUNCTION  **********************
+// Collision handling function
 function collisionHandler(player, npcs) {
   if (collisionChecker(player, npcs)) {
     const playerRect = player.getBoundingClientRect();
     for (const npc of npcs) {
       const npcRect = npc.getBoundingClientRect();
 
+      // calculates distance between player and npc centers
       let centerX, centerY;
       centerX =
         (playerRect.left + playerRect.right) / 2 -
@@ -179,41 +187,35 @@ function collisionHandler(player, npcs) {
         (playerRect.top + playerRect.bottom) / 2 -
         (npcRect.top + npcRect.bottom) / 2;
 
+      // formula works only on perfect square elements comparison
+      // checks which direction the player is coming from
       if (centerY * centerY > centerX * centerX) {
         if (centerY > 0) {
+          // player is at the BOTTOM
           playerRect.top = npcRect.bottom;
           // console.log(`from BOTTOM`);
-          // swimmerY -= pixels;
-          // player.style.transform = `translate(${swimmerX}px, ${swimmerY}px)`;
           player.style.transformOrigin = "center center";
           player.style.transform = `translate(${swimmerX}px, ${(swimmerY +=
             pixels)}px) rotate(90deg)`;
         } else {
+          // player is at the TOP
           playerRect.top = npcRect.top - playerRect.bottom;
           // console.log(`from TOP`);
-          // swimmerY -= pixels;
-          // player.style.transform = `translate(${swimmerX}px, ${swimmerY}px)`;
           player.style.transformOrigin = "center center";
           player.style.transform = `translate(${swimmerX}px, ${(swimmerY -=
             pixels)}px) rotate(90deg)`;
         }
       } else {
         if (centerX > 0) {
+          // player is on the RIGHT
           playerRect.left = npcRect.right;
           // console.log(`from RIGHT`);
-          // console.log(`vextorX: ${centerX}`);
-
-          // swimmerX += pixels;
-          // player.style.transform = `translate(${swimmerX}px, ${swimmerY}px)`;
-          player.style.transformOrigin = "center center";
           player.style.transform = `translate(${(swimmerX +=
             pixels)}px, ${swimmerY}px) rotate(90deg)`;
         } else {
+          // player is on the LEFT
           playerRect.left = npcRect.left - playerRect.right;
           // console.log(`from LEFT`);
-          // console.log(`vextorX: ${centerX}`);
-          // swimmerX -= pixels;
-          // player.style.transform = `translate(${swimmerX}px,${swimmerY}px)`;
           player.style.transformOrigin = "center center";
           player.style.transform = `translate(${(swimmerX -=
             pixels)}px,${swimmerY}px) rotate(90deg)`;
@@ -347,5 +349,33 @@ function nearBorder() {
         }
       }
     }
+  }
+} */
+
+// **************** CLICK FUNCTION ****************
+/* function whenClicking(event) {
+  if (event.type === "click") {
+    const xPosition = event.clientX;
+    const yPosition = event.clientY;
+    const areaClicked = document.elementFromPoint(xPosition, yPosition);
+    const imgWidth = swimmer.offsetWidth;
+    const imgHeight = swimmer.offsetHeight;
+
+    swimmerX = xPosition - imgWidth / 2;
+    swimmerY = yPosition - imgHeight / 2;
+
+    if (event.target === ocean) {
+      // ***
+
+      // tramsform method
+      swimmer.style.transform = `translate(${swimmerX}px,${swimmerY}px)`;
+      // position method
+      // swimmer.style.left = `${swimmerX}px`;
+      // swimmer.style.top = `${swimmerY}px`;
+
+      // console.log(`Swimmer x: ${swimmerX}, y:${swimmerY}`);
+      // ***
+    }
+    console.log(event.target);
   }
 } */

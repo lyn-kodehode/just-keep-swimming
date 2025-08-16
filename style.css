@@ -75,6 +75,7 @@ img {
   left: 95%;
   transition: all 0.5s ease;
   animation: go-around 15s 1s infinite alternate-reverse;
+  transform-origin: center center;
 }
 @keyframes go-around {
   /* bottom-right corner */
