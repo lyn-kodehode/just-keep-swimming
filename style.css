@@ -37,11 +37,12 @@ img {
   position: absolute;
   height: 100px;
   width: 100px;
-  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease;
   /* background-color: rgba(0, 0, 255, 0.189); */
 }
 #shark-box {
-  position: relative;
+  /* position: relative; */
+  position: absolute;
   display: inline-block;
   top: 50%;
   left: 50%;
@@ -54,7 +55,7 @@ img {
     transform: translate(0, 0);
   }
   15% {
-    transform: translate(100px, 0);
+    transform: translate(200px, 0);
   }
   30% {
     transform: translate(50px, 0);
@@ -73,21 +74,25 @@ img {
   }
 }
 #ship-box {
+  position: absolute;
   top: 25%;
   left: 70%;
   /* background-color: rgba(128, 128, 128, 0.284); */
 }
 #kraken-box {
+  position: absolute;
   left: 10%;
   top: 75%;
   /* background-color: rgba(128, 128, 128, 0.284); */
 }
 #mermaid-box {
+  position: absolute;
   left: 13%;
   top: 16%;
   /* background-color: rgba(128, 128, 128, 0.284); */
 }
 #floatie-box {
+  position: absolute;
   left: 65%;
   top: 70%;
   /* background-color: rgba(128, 128, 128, 0.284); */
@@ -104,13 +109,15 @@ img {
   }
 }
 #whale-box {
+  position: absolute;
   left: 30%;
   top: 10%;
   /* background-color: rgba(128, 128, 128, 0.284); */
 }
 #waves-box {
-  left: -25%;
-  top: 35%;
+  position: absolute;
+  left: 25%;
+  top: 40%;
   /* background-color: rgba(128, 128, 128, 0.284); */
 }
 .colliding {

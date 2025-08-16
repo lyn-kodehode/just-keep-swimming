@@ -35,7 +35,6 @@ function swim(event) {
 
   // runs when event is click
   if (event.type === "click") {
-    // collisionHandler(swimmer, staticElements);
     const xPosition = event.clientX;
     const yPosition = event.clientY;
 
@@ -48,13 +47,15 @@ function swim(event) {
     swimmerY = yPosition - imgHeight / 2;
     // swimmerY = yPosition - imgHeight;
 
-    // tramsform method
-    swimmer.style.transform = `translate(${swimmerX}px,${swimmerY}px)`;
-    // position method
-    // swimmer.style.left = `${swimmerX}px`;
-    // swimmer.style.top = `${swimmerY}px`;
+    if (event.target === ocean) {
+      // tramsform method
+      swimmer.style.transform = `translate(${swimmerX}px,${swimmerY}px)`;
+      // position method
+      // swimmer.style.left = `${swimmerX}px`;
+      // swimmer.style.top = `${swimmerY}px`;
 
-    // console.log(`Swimmer x: ${swimmerX}, y:${swimmerY}`);
+      // console.log(`Swimmer x: ${swimmerX}, y:${swimmerY}`);
+    }
   }
 
   // runs when event is keydown
@@ -108,6 +109,34 @@ function swim(event) {
   event.preventDefault();
   // console.log(`Swimmer x: ${swimmerX}, y:${swimmerY}`);
 }
+
+// ****************CLICK FUNCTION****************
+/* function whenClicking(event) {
+  if (event.type === "click") {
+    const xPosition = event.clientX;
+    const yPosition = event.clientY;
+    const areaClicked = document.elementFromPoint(xPosition, yPosition);
+    const imgWidth = swimmer.offsetWidth;
+    const imgHeight = swimmer.offsetHeight;
+
+    swimmerX = xPosition - imgWidth / 2;
+    swimmerY = yPosition - imgHeight / 2;
+
+    if (event.target === ocean) {
+      // ***
+
+      // tramsform method
+      swimmer.style.transform = `translate(${swimmerX}px,${swimmerY}px)`;
+      // position method
+      // swimmer.style.left = `${swimmerX}px`;
+      // swimmer.style.top = `${swimmerY}px`;
+
+      // console.log(`Swimmer x: ${swimmerX}, y:${swimmerY}`);
+      // ***
+    }
+    console.log(event.target);
+  }
+} */
 
 // *************  COLLISION CHECKING FUNCTION  **********************
 function collisionChecker(player, npcs) {
@@ -212,7 +241,8 @@ function nearBorder() {
     swimmer.style.transform = `translate(${swimmerX}px, ${(swimmerY -=
       morePixels)}px) rotate(270deg)`;
   } else {
-    console.log(`Just keep swimming`);
+    // console.log(`Just keep swimming`);
+    return;
   }
 }
 
