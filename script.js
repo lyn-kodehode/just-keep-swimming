@@ -23,11 +23,18 @@ let swimmerY = 0;
 window.addEventListener("load", () => {
   ocean.focus();
   if (ocean) {
+    // swimmer.style.transform = `translate(${pixels}%, ${pixels}%)`;
     ocean.addEventListener("click", swim);
     ocean.addEventListener("keydown", swim);
     window.addEventListener("resize", nearBorder);
+    collisionHandler(swimmer, staticElements);
   }
 });
+
+setInterval(() => {
+  // console.log(`log this every .10 second`);
+  collisionHandler(swimmer, staticElements);
+}, 100);
 
 // **************MOVEMENT FUNCTION per click/keypress  *******************
 function swim(event) {
@@ -149,7 +156,7 @@ function collisionChecker(player, npcs) {
       playerRect.top < npcRect.bottom &&
       playerRect.bottom > npcRect.top
     ) {
-      // console.log(player.id, `hits`, npc.id);
+      console.log(player.id, `collides with`, npc.id);
       return true;
     }
     continue;

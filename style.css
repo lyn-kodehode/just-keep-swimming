@@ -34,91 +34,205 @@ img {
   overflow: hidden;
 }
 #swimmer-box {
+  /* top: 10%;
+  left: 8%; */
   position: absolute;
   height: 100px;
   width: 100px;
-  transition: transform 0.1s ease;
-  /* background-color: rgba(0, 0, 255, 0.189); */
+  transition: all 0.1s ease;
+  display: inline-block;
 }
 #shark-box {
   /* position: relative; */
-  position: absolute;
-  display: inline-block;
   top: 50%;
-  left: 50%;
-  /* background-color: rgba(128, 128, 128, 0.284); */
-  animation: shark-move 10s infinite linear;
-  transition: all 0.3s ease;
+  left: 30%;
+  animation: left-right 10s infinite linear;
 }
-@keyframes shark-move {
+@keyframes left-right {
   0% {
-    transform: translate(0, 0);
+    transform: translateX(0) scaleX(1);
   }
-  15% {
-    transform: translate(200px, 0);
+  49% {
+    transform: translateX(400%) scaleX(1);
   }
-  30% {
-    transform: translate(50px, 0);
+  50% {
+    transform: translateX(400%) scaleX(-1);
   }
-  45% {
-    transform: translate(0, 0);
-  }
-  60% {
-    transform: translate(-100px, 0);
-  }
-  80% {
-    transform: translate(-50px, 0);
+  99% {
+    transform: translateX(0) scaleX(-1);
   }
   100% {
-    transform: translate(0, 0);
+    transform: translateX(0) scaleX(1);
   }
 }
 #ship-box {
-  position: absolute;
-  top: 25%;
-  left: 70%;
-  /* background-color: rgba(128, 128, 128, 0.284); */
-}
-#kraken-box {
-  position: absolute;
-  left: 10%;
-  top: 75%;
-  /* background-color: rgba(128, 128, 128, 0.284); */
-}
-#mermaid-box {
-  position: absolute;
-  left: 13%;
-  top: 16%;
-  /* background-color: rgba(128, 128, 128, 0.284); */
+  top: 20%;
+  left: 60%;
+  animation: left-right 35s infinite linear;
 }
 #floatie-box {
-  position: absolute;
-  left: 65%;
-  top: 70%;
-  /* background-color: rgba(128, 128, 128, 0.284); */
-  transition: all 0.3s ease;
-  animation: spin 1s infinite linear alternate-reverse;
-  /* animation-direction: ;  */
+  top: 89%;
+  left: 95%;
+  transition: all 0.5s ease;
+  animation: go-around 15s 1s infinite alternate-reverse;
 }
-@keyframes spin {
+@keyframes go-around {
+  /* bottom-right corner */
   0% {
+    top: 89%;
+    left: 94%;
     transform: rotate(0deg);
   }
+  /* bottom-left corner */
+  25% {
+    top: 89%;
+    left: 0%;
+    transform: rotate(90deg);
+  }
+  /* top-left */
+  50% {
+    top: 89%;
+    left: 94%;
+    transform: rotate(180deg);
+  }
+  /* top-right corner */
+  75% {
+    top: 0%;
+    left: 94%;
+    transform: rotate(270deg);
+  }
+  /* back to bottom-right corner */
   100% {
+    top: 89%;
+    left: 94%;
     transform: rotate(360deg);
   }
 }
-#whale-box {
-  position: absolute;
-  left: 30%;
-  top: 10%;
-  /* background-color: rgba(128, 128, 128, 0.284); */
+/* @keyframes go-around {
+  bottom-right corner
+  0% {
+    top: 89%;
+    left: 95%;
+    transform: rotate(0deg);
+  }
+  bottom-left corner
+  25% {
+    top: 89%;
+    left: 75%;
+    transform: rotate(90deg);
+  }
+  top-left
+  50% {
+    top: 55%;
+    left: 75%;
+    transform: rotate(180deg);
+  }
+  top-right corner
+  75% {
+    top: 55%;
+    left: 95%;
+    transform: rotate(270deg);
+  }
+  back to bottom-right corner
+  100% {
+    top: 89%;
+    left: 95%;
+    transform: rotate(360deg);
+  }
+} */
+#waves-box1 {
+  top: 20%;
+  left: 15%;
+  /* animation don't do anything here */
+  animation: fade-in-out 9s ease-in-out infinite,
+    teleport 10s infinite ease-in-out;
+  transition: visibility 0s allow-discrete; /* syncs visibility with opacity */
 }
-#waves-box {
-  position: absolute;
+/* display: none is non-animatable */
+/* fade-in, stay visible, then hidden */
+/* animate opacity + visibility -->> a discrete propert */
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    visibility: hidden; /* not clickable */
+  }
+  0% {
+    opacity: 0;
+    visibility: hidden; /* not clickable */
+  }
+  10% {
+    opacity: 1;
+    visibility: visible; /* not clickable */
+  }
+  30% {
+    opacity: 1;
+    visibility: visible; /* not clickable */
+  }
+  40% {
+    opacity: 0;
+    visibility: hidden; /* not clickable */
+  }
+  60% {
+    opacity: 0;
+    visibility: hidden; /* not clickable */
+  }
+  70% {
+    opacity: 1;
+    visibility: visible;
+  }
+  80% {
+    opacity: 1;
+    visibility: visible;
+  }
+  90% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes teleport {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(100px);
+  }
+  30% {
+    transform: translateY(200px);
+  }
+  40% {
+    transform: translateY(300px);
+  }
+  60% {
+    transform: translateY(400px);
+  }
+  70% {
+    transform: translateY(300px);
+  }
+  80% {
+    transform: translateY(200px);
+  }
+  90% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+#waves-box2 {
+  top: 39%;
   left: 25%;
-  top: 40%;
-  /* background-color: rgba(128, 128, 128, 0.284); */
+  animation: fade-in-out 7s 2s ease-in-out infinite;
+  transition: visibility 0s allow-discrete;
+}
+#waves-box3 {
+  top: 48%;
+  left: 25%;
+  animation: fade-in-out 7s 3s ease-in-out infinite;
+  transition: visibility 0s allow-discrete;
 }
 .colliding {
   border-radius: 50%;
@@ -128,5 +242,5 @@ img {
   height: 100px;
   width: 100px;
   display: inline-block;
-  position: relative;
+  position: absolute;
 }
