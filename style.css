@@ -245,3 +245,38 @@ img {
   display: inline-block;
   position: absolute;
 }
+#top-wall {
+  height: 0.1%;
+  width: 100%;
+  background-color: #4ac5cf;
+  /* background-color: black; */
+  position: fixed;
+  display: block;
+}
+#bottom-wall {
+  height: 0.1%;
+  width: 100%;
+  background-color: #0973ba;
+  /* background-color: black; */
+  position: fixed;
+  display: block;
+  bottom: 0;
+}
+#left-wall {
+  height: 100%;
+  width: 0.1%;
+  background-color: #4ac5cf;
+  /* background-color: black; */
+  position: fixed;
+  display: block;
+  left: 0;
+}
+#right-wall {
+  height: 100%;
+  width: 0.1%;
+  background-color: #4ac5cf;
+  /* background-color: black; */
+  position: fixed;
+  display: block;
+  right: 0;
+}

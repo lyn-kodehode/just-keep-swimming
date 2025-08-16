@@ -14,7 +14,7 @@ const sharky = document.getElementById("shark-box");
 const ship = document.getElementById("ship-box");
 const kraken = document.getElementById("kraken-box");
 const staticElements = document.querySelectorAll(".npc-box");
-const pixels = 10;
+const pixels = 5;
 const morePixels = 60;
 let swimmingRight = false;
 let swimmingLeft = false;
@@ -39,11 +39,12 @@ window.addEventListener("load", () => {
 setInterval(() => {
   // console.log(`log this every .10 second`);
   collisionHandler(swimmer, staticElements);
+  nearBorder();
 }, 100);
 
 // MOVEMENT FUNCTION per click/keypress
 function swim(event) {
-  nearBorder();
+  // nearBorder();
 
   if (event.type === "click") {
     whenClicking(event);
