@@ -196,30 +196,38 @@ function collisionHandler(player, npcs) {
           playerRect.top = npcRect.bottom;
           // console.log(`from BOTTOM`);
           player.style.transformOrigin = "center center";
+          // player.style.transform = `translate(${swimmerX}px, ${(swimmerY +=
+          //   pixels)}px) rotate(90deg)`;
           player.style.transform = `translate(${swimmerX}px, ${(swimmerY +=
-            pixels)}px) rotate(90deg)`;
+            pixels)}px) rotate(360deg)`;
         } else {
           // player is at the TOP
           playerRect.top = npcRect.top - playerRect.bottom;
           // console.log(`from TOP`);
           player.style.transformOrigin = "center center";
+          // player.style.transform = `translate(${swimmerX}px, ${(swimmerY -=
+          //   pixels)}px) rotate(90deg)`;
           player.style.transform = `translate(${swimmerX}px, ${(swimmerY -=
-            pixels)}px) rotate(90deg)`;
+            pixels)}px) rotate(360deg)`;
         }
       } else {
         if (centerX > 0) {
           // player is on the RIGHT
           playerRect.left = npcRect.right;
           // console.log(`from RIGHT`);
+          // player.style.transform = `translate(${(swimmerX +=
+          //   pixels)}px, ${swimmerY}px) rotate(90deg)`;
           player.style.transform = `translate(${(swimmerX +=
-            pixels)}px, ${swimmerY}px) rotate(90deg)`;
+            pixels)}px, ${swimmerY}px) rotate(360deg)`;
         } else {
           // player is on the LEFT
           playerRect.left = npcRect.left - playerRect.right;
           // console.log(`from LEFT`);
           player.style.transformOrigin = "center center";
+          // player.style.transform = `translate(${(swimmerX -=
+          //   pixels)}px,${swimmerY}px) rotate(90deg)`;
           player.style.transform = `translate(${(swimmerX -=
-            pixels)}px,${swimmerY}px) rotate(90deg)`;
+            pixels)}px,${swimmerY}px) rotate(360deg)`;
         }
       }
     }
@@ -233,21 +241,29 @@ function nearBorder() {
 
   if (swimmerX < 0) {
     // console.log(`Swimmer is near Border`);
-    swimmer.style.transformOrigin = "center center";
+    // swimmer.style.transformOrigin = "center center";
+    // swimmer.style.transform = `translate(${(swimmerX +=
+    //   morePixels)}px, ${swimmerY}px) scaleX(1)`;
     swimmer.style.transform = `translate(${(swimmerX +=
-      morePixels)}px, ${swimmerY}px) scaleX(1)`;
+      morePixels)}px, ${swimmerY}px) rotate(270deg)`;
   } else if (swimmerY < -5) {
     console.log(`Swimmer is near Border`);
-    swimmer.style.transformOrigin = "center center";
+    // swimmer.style.transformOrigin = "center center";
+    // swimmer.style.transform = `translate(${swimmerX}px, ${(swimmerY +=
+    //   morePixels)}px) rotate(90deg)`;
     swimmer.style.transform = `translate(${swimmerX}px, ${(swimmerY +=
-      morePixels)}px) rotate(90deg)`;
+      morePixels)}px) rotate(270deg)`;
   } else if (swimmerX > screenWidth - 70) {
     // console.log(`Swimmer is near Border`);
-    swimmer.style.transformOrigin = "center center";
+    // swimmer.style.transformOrigin = "center center";
+    // swimmer.style.transform = `translate(${(swimmerX -=
+    //   morePixels)}px,${swimmerY}px) scaleX(-1)`;
     swimmer.style.transform = `translate(${(swimmerX -=
-      morePixels)}px,${swimmerY}px) scaleX(-1)`;
+      morePixels)}px,${swimmerY}px) rotate(270deg)`;
   } else if (swimmerY > screenHeight - 70) {
-    swimmer.style.transformOrigin = "center center";
+    // swimmer.style.transformOrigin = "center center";
+    // swimmer.style.transform = `translate(${swimmerX}px, ${(swimmerY -=
+    //   morePixels)}px) rotate(270deg)`;
     swimmer.style.transform = `translate(${swimmerX}px, ${(swimmerY -=
       morePixels)}px) rotate(270deg)`;
   } else {
