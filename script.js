@@ -198,7 +198,7 @@ function collisionHandler(player, npcs) {
         if (centerY > 0) {
           // player is at the BOTTOM
           playerRect.top = npcRect.bottom;
-          console.log(`from BOTTOM`);
+          // console.log(`from BOTTOM`);
           player.style.transformOrigin = "center center";
           // player.style.transform = `translate(${swimmerX}px, ${(swimmerY +=
           //   pixels)}px) rotate(90deg)`;
@@ -207,7 +207,7 @@ function collisionHandler(player, npcs) {
         } else {
           // player is at the TOP
           playerRect.top = npcRect.top - playerRect.bottom;
-          console.log(`from TOP`);
+          // console.log(`from TOP`);
           player.style.transformOrigin = "center center";
           // player.style.transform = `translate(${swimmerX}px, ${(swimmerY -=
           //   pixels)}px) rotate(90deg)`;
@@ -218,7 +218,7 @@ function collisionHandler(player, npcs) {
         if (centerX > 0) {
           // player is on the RIGHT
           playerRect.left = npcRect.right;
-          console.log(`from RIGHT`);
+          // console.log(`from RIGHT`);
           player.style.transformOrigin = "center center";
           player.style.transform = `translate(${(swimmerX +=
             pixels)}px, ${swimmerY}px) rotate(270deg)`;
@@ -226,7 +226,7 @@ function collisionHandler(player, npcs) {
         } else {
           // player is on the LEFT
           playerRect.left = npcRect.left - playerRect.right;
-          console.log(`from LEFT`);
+          // console.log(`from LEFT`);
           player.style.transformOrigin = "center center";
           // player.style.transform = `translate(${(swimmerX -=
           //   pixels)}px,${swimmerY}px) rotate(90deg)`;
