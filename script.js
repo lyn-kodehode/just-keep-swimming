@@ -1,13 +1,4 @@
-// **********************************************************************
-// TO-DO-LIST
-// 1. create a boundary border check so swimmer cant go beyond viewport
-// 2. check, fix or change computation on BOTTOM in collisionHandling()
-// 3. create a window screen how the game works
-// 4. make the obstacles move (optional)
-// 5. make the obstacles move in random distance (pixels, etc) (optional)
-// 6. add if else statement on click to check for existing elements
-// **************************************************************************************************************
-
+// variable declaration
 const swimmer = document.getElementById("swimmer");
 const ocean = document.getElementById("game-container");
 const staticElements = document.querySelectorAll(".npc");
@@ -105,27 +96,15 @@ function whenKeyPressing(event) {
   switch (event.key) {
     case "ArrowUp":
       swimmingUp = true;
-      // swimmer.style.transformOrigin = "center center";
-      // swimmer.style.transform = `translate(${swimmerX}px,${(swimmerY -=
-      //   pixels)}px) rotate(270deg)`;
       break;
     case "ArrowDown":
       swimmingDown = true;
-      // swimmer.style.transformOrigin = "center center";
-      // swimmer.style.transform = `translate(${swimmerX}px,${(swimmerY +=
-      //   pixels)}px) rotate(90deg)`;
       break;
     case "ArrowLeft":
       swimmingLeft = true;
-      // swimmer.style.transformOrigin = "center center";
-      // swimmer.style.transform = `translate(${(swimmerX -=
-      //   pixels)}px,${swimmerY}px) scaleX(-1)`;
       break;
     case "ArrowRight":
       swimmingRight = true;
-    // swimmer.style.transformOrigin = "center center";
-    // swimmer.style.transform = `translate(${(swimmerX +=
-    //   pixels)}px,${swimmerY}px) rotate(0deg)`;
     default:
       break;
   }
@@ -300,128 +279,3 @@ function nearBorder() {
     return;
   }
 }
-
-// *************  COLLISION CHECKER FUNCTION  **********************
-/* function collisionChecker(player, npcs) {
-  const playerRect = player.getBoundingClientRect();
-  for (const npc of npcs) {
-    const npcRect = npc.getBoundingClientRect();
-    if (
-      playerRect.left < npcRect.right &&
-      playerRect.right > npcRect.left &&
-      playerRect.top < npcRect.bottom &&
-      playerRect.bottom > npcRect.top
-    ) {
-      console.log(player.id, `hits`, npc.id);
-      return true;
-    }
-    continue;
-  }
-  return false;
-} */
-
-// ***************  COLLISION HANDLER FUNCTION  *********************
-/* function collisionHandler(player, npcs) {
-  if (collisionChecker(player, npcs)) {
-    const playerRect = player.getBoundingClientRect();
-    for (const npc of npcs) {
-      const npcRect = npc.getBoundingClientRect();
-
-      // finds the smallest overlap on X,Y axis
-      // bottom - top, right - left
-      // Math.abs()
-      const overlapX = Math.min(
-        Math.abs(playerRect.right - npcRect.left),
-        Math.abs(npcRect.right - playerRect.left)
-      );
-
-      // console.log(
-      //   `PlayerRIGHT: ${playerRect.right} - NpcLEFT: ${npcRect.left}`
-      // );
-      // console.log(
-      //   `NpcRIGHT: ${npcRect.right} - PlayerLEFT: ${playerRect.left}`
-      // );
-
-      const overlapY = Math.min(
-        Math.abs(playerRect.top - npcRect.bottom),
-        Math.abs(npcRect.top - playerRect.bottom)
-      );
-
-      // console.log(
-      //   `PlayerTOP: ${playerRect.top} - NpcBOTTOM: ${npcRect.bottom}`
-      // );
-      // console.log(
-      //   `NpcTOP: ${npcRect.top} - PlayerBOTTOM: ${playerRect.bottom}`
-      // );
-
-      // console.log(`OverlapX: ${overlapX}, Overlap Y: ${overlapY}`);
-      // console.log(overlapY);
-
-      if (overlapX < overlapY) {
-        // console.log(`X < Y : HORIZONTAL COLLISION`);
-        // it's a horixontal collision
-        if (playerRect.left < npcRect.left) {
-          console.log(`from the LEFT`);
-          // the hit was from the left
-          swimmerX -= pixels;
-          // player.style.transform = `translate(${(swimmerX -=
-          //   pixels)}px,${swimmerY}px)`;
-          player.style.transform = `translate(${(swimmerX -=
-            pixels)}px,${swimmerY}px) scaleX(-1)`;
-        } else {
-          console.log(`from the RIGHT`);
-          // the hit is from the right
-          swimmerX += pixels;
-          player.style.transform = `translate(${swimmerX}px, ${swimmerY}px)`;
-          // player.style.transform = `translate(${swimmerX}px, ${swimmerY}px) scaleX(1)`;
-        }
-      } else {
-        // console.log(`X > Y : VERTICAL COLLISION`);
-        // it's a vertical collision
-        if (playerRect.top < npcRect.bottom) {
-          console.log(`from the TOP`);
-          // its a hit from the top
-          swimmerY -= pixels;
-          // player.style.transform = `translate(${swimmerX}px, ${swimmerY}px)`;
-          player.style.transform = `translate(${swimmerX}px, ${swimmerY}px) rotate(360deg)`;
-        } else {
-          // ********COMPUTATION HERE IS OFF*****
-          // movements are not blocked*******
-          console.log(`from the BOTTOM`);
-          // its a hit from the bottom
-          swimmerY += pixels;
-          // player.style.transform = `translate(${swimmerX}px, ${swimmerY}px)`;
-          player.style.transform = `translate(${swimmerX}px, ${swimmerY}px) rotate(360deg)`;
-        }
-      }
-    }
-  }
-} */
-
-// **************** CLICK FUNCTION ****************
-/* function whenClicking(event) {
-  if (event.type === "click") {
-    const xPosition = event.clientX;
-    const yPosition = event.clientY;
-    const areaClicked = document.elementFromPoint(xPosition, yPosition);
-    const imgWidth = swimmer.offsetWidth;
-    const imgHeight = swimmer.offsetHeight;
-
-    swimmerX = xPosition - imgWidth / 2;
-    swimmerY = yPosition - imgHeight / 2;
-
-    if (event.target === ocean) {
-      // ***
-
-      // tramsform method
-      swimmer.style.transform = `translate(${swimmerX}px,${swimmerY}px)`;
-      // position method
-      // swimmer.style.left = `${swimmerX}px`;
-      // swimmer.style.top = `${swimmerY}px`;
-
-      // console.log(`Swimmer x: ${swimmerX}, y:${swimmerY}`);
-      // ***
-    }
-    console.log(event.target);
-  }
-} */
