@@ -5,7 +5,13 @@
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+    <title>Just Keep Swimming</title>
   </head>
   <body>
     <!-- <header>Swim</header> -->
@@ -33,7 +39,9 @@
         <img class="waves-img" src="./images/water-waves.png" alt="" />
       </div>
     </section>
-    <dialog id="welcome-dialog" open>
+    <!-- add open  -->
+    <!-- <dialog id="welcome-dialog" open> -->
+    <dialog id="welcome-dialog">
       <div id="welcome-container">
         <div class="welcome-left">
           <h2>Hello, meet Chad!</h2>
@@ -49,7 +57,12 @@
           <div id="chad-box">
             <img id=" chad-img" src="./images/swimmer.png" alt="" />
           </div>
-          <button id="start-btn">Start</button>
+          <button
+            id="start-btn"
+            onclick="document.getElementById('welcome-dialog').close()"
+          >
+            Start
+          </button>
         </div>
       </div>
     </dialog>

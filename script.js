@@ -14,6 +14,7 @@ const sharky = document.getElementById("shark-box");
 const ship = document.getElementById("ship-box");
 const kraken = document.getElementById("kraken-box");
 const staticElements = document.querySelectorAll(".npc-box");
+const welcomeDialog = document.getElementById("welcome-dialog");
 const pixels = 5;
 const morePixels = 60;
 let swimmingRight = false;
@@ -25,6 +26,7 @@ let swimmerY = 0;
 
 // eventlistener on load
 window.addEventListener("load", () => {
+  welcomeDialog.showModal();
   ocean.focus();
   if (ocean) {
     window.addEventListener("resize", nearBorder);

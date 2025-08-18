@@ -7,18 +7,24 @@ html {
   transition-behavior: smooth;
 }
 body {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
+  position: relative;
 }
 img {
   height: 100%;
 }
+h2 {
+  font-family: "Jersey 10", sans-serif;
+  font-size: 3rem;
+}
 p {
   line-height: 1.4;
+  font-family: "Questrial", sans-serif;
 }
 #game-container {
   display: flex;
@@ -286,16 +292,40 @@ p {
   /* align-self: center; */
   justify-self: center;
   width: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#welcome-dialog::backdrop {
+  background-image: linear-gradient(
+    #4bc7cf,
+    #3cb7cb,
+    #2da7c7,
+    #1e97c4,
+    #0f7ac0,
+    #0771b8
+  );
 }
 #welcome-container {
-  /* padding: 1rem; */
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-evenly;
 }
 #start-btn {
   display: inline-block;
-  padding: 0.8rem;
+  padding: 0.6rem;
+  font-family: "Jersey 10", sans-serif;
+  font-size: 2rem;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  color: #666666;
+}
+#start-btn:hover {
+  transform: scale(1.2);
+  background-color: #d7d7d7;
+  color: #000;
+  box-shadow: 0 5px 5px #999999;
 }
 .welcome-left {
   display: flex;
@@ -303,7 +333,12 @@ p {
   padding: 1rem;
   flex-direction: column;
   width: 60%;
+  justify-content: space-evenly;
 }
 .welcome-right {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  gap: 0.8rem;
 }
