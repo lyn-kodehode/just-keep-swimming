@@ -10,9 +10,6 @@
 
 const swimmer = document.getElementById("swimmer");
 const ocean = document.getElementById("game-container");
-// const sharky = document.getElementById("shark-box");
-// const ship = document.getElementById("ship-box");
-// const kraken = document.getElementById("kraken-box");
 const staticElements = document.querySelectorAll(".npc");
 const welcomeDialog = document.getElementById("welcome-dialog");
 const statusDialog = document.getElementById("status-dialog");
@@ -20,6 +17,7 @@ const statusContainer = document.getElementById("status-container");
 const startBtn = document.getElementById("start-btn");
 const pixels = 5;
 const morePixels = 60;
+let stopSwimming = false;
 let swimmingRight = false;
 let swimmingLeft = false;
 let swimmingUp = false;
@@ -27,11 +25,10 @@ let swimmingDown = false;
 let swimmerX = 0;
 let swimmerY = 0;
 
-// eventlistener on load
+// eventlistener on window load
 window.addEventListener("load", () => {
   welcomeDialog.showModal();
   startBtn.addEventListener("click", () => {
-    // ocean.focus();
     if (ocean) {
       ocean.focus();
       window.addEventListener("resize", nearBorder);
@@ -50,11 +47,11 @@ setInterval(() => {
   nearBorder();
 }, 100);
 
-// showStatus function
+// show collision with npcs status msg function
 const showStatus = (player, npc) => {
   if (npc.classList.contains("npc-box")) {
     const statusMessage = document.createElement("p");
-    statusMessage.textContent = `${player.id} Chad collides with the ${npc.id}`;
+    statusMessage.textContent = `${player.id} Chad hits the ${npc.id}`;
     statusDialog.append(statusMessage);
   }
   statusDialog.scrollTo({
@@ -103,6 +100,8 @@ function whenClicking(event) {
 
 // onKeyPress event function
 function whenKeyPressing(event) {
+  // console.log(event.key);
+
   switch (event.key) {
     case "ArrowUp":
       swimmingUp = true;
@@ -124,15 +123,15 @@ function whenKeyPressing(event) {
       break;
     case "ArrowRight":
       swimmingRight = true;
-      // swimmer.style.transformOrigin = "center center";
-      // swimmer.style.transform = `translate(${(swimmerX +=
-      //   pixels)}px,${swimmerY}px) rotate(0deg)`;
-      break;
+    // swimmer.style.transformOrigin = "center center";
+    // swimmer.style.transform = `translate(${(swimmerX +=
+    //   pixels)}px,${swimmerY}px) rotate(0deg)`;
     default:
       break;
   }
 }
 
+// when no key is pressed function
 function noKeyPress(event) {
   switch (event.key) {
     case "ArrowUp":
@@ -151,6 +150,8 @@ function noKeyPress(event) {
       break;
   }
 }
+
+// adds speed on keypress event function
 function speedBoost() {
   if (swimmingUp) {
     // swimmerY -= pixels;
@@ -176,6 +177,7 @@ function speedBoost() {
     swimmer.style.transform = `translate(${(swimmerX +=
       pixels)}px,${swimmerY}px)`;
   }
+  // smooth animation on keypress
   requestAnimationFrame(speedBoost);
 }
 
@@ -190,10 +192,9 @@ function collisionChecker(player, npcs) {
       playerRect.top < npcRect.bottom &&
       playerRect.bottom > npcRect.top
     ) {
-      console.log(player.id, `collides with`, npc.id);
+      // console.log(player.id, `collides with`, npc.id);
       showStatus(player, npc);
       return true;
-      // return `${player.id} collides with ${npc.id}`;
     }
     continue;
   }
@@ -262,7 +263,7 @@ function collisionHandler(player, npcs) {
   }
 }
 
-// *************  CONTAINER BORDER CHECKING FUNCTION  **********************
+// container border checker function
 function nearBorder() {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;

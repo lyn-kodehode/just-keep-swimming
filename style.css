@@ -356,9 +356,11 @@ p {
   border: none;
   color: rgba(255, 255, 255, 0.568);
 }
-.start-span {
+.start-span,
+.arrow-span {
   font-family: var(--h2-font-primary);
   font-size: 1.2rem;
+  color: #666666;
 }
 .start-span:focus {
   outline: #d7d7d7;
