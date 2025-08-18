@@ -16,40 +16,44 @@
   <body>
     <!-- <header>Swim</header> -->
     <section id="game-container" tabindex="0">
-      <div class="npc-box" id="top-wall"></div>
-      <div class="npc-box" id="bottom-wall"></div>
-      <div class="npc-box" id="left-wall"></div>
-      <div class="npc-box" id="right-wall"></div>
-      <div id="swimmer-box" class="player-box">
+      <div class="npc npc-wall" id="top-wall"></div>
+      <div class="npc npc-wall" id="bottom-wall"></div>
+      <div class="npc npc-wall" id="left-wall"></div>
+      <div class="npc npc-wall" id="right-wall"></div>
+      <div id="swimmer" class="player-box">
         <img class="swimmer-img" src="./images/swimmer_right.png" alt="" />
       </div>
-      <div id="shark-box" class="npc-box">
+      <div id="shark" class="npc npc-box">
         <img class="shark-img" src="./images/sharkfin_right.png" alt="" />
       </div>
-      <div id="ship-box" class="npc-box">
+      <div id="ship" class="npc npc-box">
         <img class="ship-img" src="./images/ship.png" alt="" />
       </div>
-      <div id="floatie-box" class="npc-box">
+      <div id="floatie" class="npc npc-box">
         <img class="floatie-img" src="./images/buoy.png" alt="" />
       </div>
-      <div id="waves-box1" class="npc-box">
+      <div id="left-waves" class="npc npc-box">
         <img class="waves-img" src="./images/water-waves.png" alt="" />
       </div>
-      <div id="waves-box2" class="npc-box">
+      <div id="right-waves" class="npc npc-box">
         <img class="waves-img" src="./images/water-waves.png" alt="" />
       </div>
     </section>
     <!-- add open  -->
     <!-- <dialog id="welcome-dialog" open> -->
-    <dialog id="welcome-dialog">
+    <dialog id="welcome-dialog" tabindex="0">
       <div id="welcome-container">
         <div class="welcome-left">
           <h2>Hello, meet Chad!</h2>
           <p>
             Use your arrow keys to help Chad swim around the water and avoid any
             obstacles that he may meet along the way. Feel free to click
-            anywhere on the screen to move him as well. Click 'Start' when ready
-            and remember to "Just Keep Swimming"
+            anywhere on the screen to move him as well.
+          </p>
+          <p>
+            Click <span class="start-span" tabindex="0">Start</span> when ready
+            and remember to
+            <span class="keep-swimming">Just Keep Swimming</span>
           </p>
         </div>
 
@@ -65,6 +69,9 @@
           </button>
         </div>
       </div>
+    </dialog>
+    <dialog id="status-dialog" open>
+      <!-- <div id="status-container"></div> -->
     </dialog>
   </body>
 </html>

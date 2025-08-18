@@ -8,13 +8,16 @@
 // 6. add if else statement on click to check for existing elements
 // **************************************************************************************************************
 
-const swimmer = document.getElementById("swimmer-box");
+const swimmer = document.getElementById("swimmer");
 const ocean = document.getElementById("game-container");
-const sharky = document.getElementById("shark-box");
-const ship = document.getElementById("ship-box");
-const kraken = document.getElementById("kraken-box");
-const staticElements = document.querySelectorAll(".npc-box");
+// const sharky = document.getElementById("shark-box");
+// const ship = document.getElementById("ship-box");
+// const kraken = document.getElementById("kraken-box");
+const staticElements = document.querySelectorAll(".npc");
 const welcomeDialog = document.getElementById("welcome-dialog");
+const statusDialog = document.getElementById("status-dialog");
+const statusContainer = document.getElementById("status-container");
+const startBtn = document.getElementById("start-btn");
 const pixels = 5;
 const morePixels = 60;
 let swimmingRight = false;
@@ -27,14 +30,17 @@ let swimmerY = 0;
 // eventlistener on load
 window.addEventListener("load", () => {
   welcomeDialog.showModal();
-  ocean.focus();
-  if (ocean) {
-    window.addEventListener("resize", nearBorder);
-    ocean.addEventListener("click", swim);
-    ocean.addEventListener("keydown", swim);
-    ocean.addEventListener("keyup", swim);
-    speedBoost();
-  }
+  startBtn.addEventListener("click", () => {
+    // ocean.focus();
+    if (ocean) {
+      ocean.focus();
+      window.addEventListener("resize", nearBorder);
+      ocean.addEventListener("click", swim);
+      ocean.addEventListener("keydown", swim);
+      ocean.addEventListener("keyup", swim);
+      speedBoost();
+    }
+  });
 });
 
 //collision handling per .10 seconds
@@ -44,9 +50,23 @@ setInterval(() => {
   nearBorder();
 }, 100);
 
+// showStatus function
+const showStatus = (player, npc) => {
+  if (npc.classList.contains("npc-box")) {
+    const statusMessage = document.createElement("p");
+    statusMessage.textContent = `${player.id} Chad collides with the ${npc.id}`;
+    statusDialog.append(statusMessage);
+  }
+  statusDialog.scrollTo({
+    top: statusDialog.scrollHeight,
+    behavior: "smooth",
+  });
+};
+
 // MOVEMENT FUNCTION per click/keypress
 function swim(event) {
   // nearBorder();
+  // showStatus(swimmer, staticElements);
 
   if (event.type === "click") {
     whenClicking(event);
@@ -171,7 +191,9 @@ function collisionChecker(player, npcs) {
       playerRect.bottom > npcRect.top
     ) {
       console.log(player.id, `collides with`, npc.id);
+      showStatus(player, npc);
       return true;
+      // return `${player.id} collides with ${npc.id}`;
     }
     continue;
   }
@@ -253,7 +275,7 @@ function nearBorder() {
     swimmer.style.transform = `translate(${(swimmerX +=
       morePixels)}px, ${swimmerY}px) rotate(270deg)`;
   } else if (swimmerY < -5) {
-    console.log(`Swimmer is near Border`);
+    // console.log(`Swimmer is near Border`);
     swimmer.style.transformOrigin = "center center";
     // swimmer.style.transform = `translate(${swimmerX}px, ${(swimmerY +=
     //   morePixels)}px) rotate(90deg)`;
